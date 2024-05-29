@@ -1,4 +1,3 @@
-// src/components/HomePage.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
@@ -21,7 +20,8 @@ import { Add as AddIcon } from '@mui/icons-material';
 import { makeStyles } from '@mui/styles';
 import PostForm from './CreatePostPage';
 import UpdatePostPage from './UpdatePostPage';
-import  './HomePage.css'
+import './HomePage.css';
+
 const useStyles = makeStyles(() => ({
     fab: { position: 'fixed', bottom: 16, right: 16 },
     modal: { display: 'flex', alignItems: 'center', justifyContent: 'center' },
@@ -31,7 +31,6 @@ const useStyles = makeStyles(() => ({
     toolbar: { display: 'flex', justifyContent: 'space-between' },
     section: { marginTop: 32 },
 }));
-
 
 const HomePage = () => {
     const classes = useStyles();
@@ -81,13 +80,10 @@ const HomePage = () => {
         }
     };
 
-   
-
     const openUpdateModal = (post) => {
         setCurrentPost(post);
         setUpdateModalOpen(true);
     };
-
 
     const viewPostDetails = (id) => {
         navigate(`/posts/${id}`);
@@ -95,7 +91,7 @@ const HomePage = () => {
 
     return (
         <div>
-            <AppBar position="static">
+            <AppBar position="sticky">
                 <Toolbar className={classes.toolbar}>
                     <Box>
                         <img className="icons" src="https://i.ibb.co/M8krpZM/image.png" alt="" />
@@ -111,7 +107,7 @@ const HomePage = () => {
                 </Toolbar>
             </AppBar>
             <Container>
-                <Typography variant="h4" gutterBottom align='center '>Trending Posts</Typography>
+                <Typography variant="h4" gutterBottom align='center'>Trending Posts</Typography>
                 <Grid container spacing={3}>
                     {trendingPosts.map((post) => (
                         <Grid item xs={12} sm={6} md={4} key={post.id}>
@@ -154,7 +150,6 @@ const HomePage = () => {
                 </Grid>
             </Container>
 
-            
             <Modal
                 open={isCreateModalOpen}
                 onClose={() => setCreateModalOpen(false)}
@@ -165,7 +160,7 @@ const HomePage = () => {
                 </div>
             </Modal>
 
-            <UpdatePostPage classes={classes} posts={posts} isUpdateModalOpen={isUpdateModalOpen} setUpdateModalOpen={setUpdateModalOpen} currentPost={currentPost} setCurrentPost={setCurrentPost} setPosts={setPosts}/>
+            <UpdatePostPage classes={classes} posts={posts} isUpdateModalOpen={isUpdateModalOpen} setUpdateModalOpen={setUpdateModalOpen} currentPost={currentPost} setCurrentPost={setCurrentPost} setPosts={setPosts} />
         </div>
     );
 };
